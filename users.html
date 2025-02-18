@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<main>
+    <h2>Liste des utilisateurs</h2>
+
+    <!-- Barre de recherche -->
+    <input type="text" id="searchBar" placeholder="Rechercher un utilisateur..." onkeyup="searchUser()" />
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Email</th>
+                <th>Téléphone</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Les données JSON seront insérées ici -->
+        </tbody>
+    </table>
+
+    <script>
+        // Fonction pour la recherche
+        function searchUser() {
+            const searchInput = document.getElementById("searchBar").value.toLowerCase();
+            const rows = document.querySelectorAll("tbody tr");
+
+            rows.forEach(row => {
+                const cells = row.querySelectorAll("td");
+                const match = Array.from(cells).some(cell => cell.textContent.toLowerCase().includes(searchInput));
+                row.style.display = match ? "" : "none";
+            });
+        }
+    </script>
+</main>
+</body>
+</html>
