@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contactez-nous</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>Contactez-nous</h1>
+  <nav>
+    <ul>
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="users.html">Utilisateurs</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+<main>
+  <h2>Formulaire de contact</h2>
+  <form id="form-contact">
+    <label for="nom">Nom :</label>
+    <input type="text" id="nom" name="nom" required><br><br>
+
+    <label for="email">Email :</label>
+    <input type="email" id="email" name="email" required><br><br>
+
+    <label for="message">Message :</label><br>
+    <textarea id="message" name="message" rows="5" cols="30" required></textarea><br><br>
+
+    <button type="submit">Envoyer</button>
+  </form>
+</main>
+<footer>
+  <p>&copy; 2023 Projet Soutenance</p>
+</footer>
+
+<!-- Validation du formulaire avec JavaScript -->
+<script>
+  // Validation du formulaire
+  document.getElementById('form-contact').addEventListener('submit', function(event) {
+    const nom = document.getElementById('nom').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+
+    // Vérifie si tous les champs sont remplis
+    if (nom === '' || email === '' || message === '') {
+      alert("Tous les champs doivent être remplis !");
+      event.preventDefault();
+      return;
+    }
+
+    // Vérifie si l'adresse email est valide
+    const emailRegex = /\S+@\S+\.\S+/; // Format basique d'une adresse email
+    if (!emailRegex.test(email)) {
+      alert("Veuillez entrer une adresse email valide !");
+      event.preventDefault();
+      return;
+    }
+
+    // Message de confirmation avant envoi
+    alert("Votre message a bien été envoyé !");
+  });
+</script>
+</body>
+</html>
