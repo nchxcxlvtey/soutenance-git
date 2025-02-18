@@ -1,6 +1,4 @@
 <!DOCTYPE html>
-
-<body>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -24,73 +22,6 @@
     <table>
         <thead>
 
-            <tr>
-                <th>Nom</th>
-                <th>Email</th>
-                <th>Téléphone</th>
-            </tr>
-        </thead>
-        <tbody id="userTable">
-            <!-- Les données seront insérées ici -->
-        </tbody>
-    </table>
-
-    <div id="pagination">
-        <!-- Boutons pour la pagination -->
-    </div>
-
-    <script>
-        const users = [
-            { "nom": "Dupont", "email": "dupont@gmail.com", "telephone": "123" },
-            { "nom": "Martin", "email": "martin@gmail.com", "telephone": "456" },
-            /* Ajoute autant d'utilisateurs que nécessaire */
-        ];
-
-        const rowsPerPage = 5;
-        let currentPage = 1;
-
-        // Fonction pour afficher les utilisateurs par page
-        function displayUsers(page) {
-            const start = (page - 1) * rowsPerPage;
-            const end = start + rowsPerPage;
-
-            const usersToShow = users.slice(start, end);
-
-            const tbody = document.getElementById("userTable");
-            tbody.innerHTML = "";
-
-            usersToShow.forEach(user => {
-                const row = `
-                    <tr>
-                        <td>${user.nom}</td>
-                        <td>${user.email}</td>
-                        <td>${user.telephone}</td>
-                    </tr>`;
-                tbody.innerHTML += row;
-            });
-
-            updatePagination();
-        }
-
-        // Fonction pour afficher les boutons de pagination
-        function updatePagination() {
-            const totalPages = Math.ceil(users.length / rowsPerPage);
-            const paginationDiv = document.getElementById("pagination");
-
-            paginationDiv.innerHTML = "";
-
-            for (let i = 1; i <= totalPages; i++) {
-                const button = document.createElement("button");
-                button.textContent = i;
-                button.addEventListener("click", () => displayUsers(i));
-                paginationDiv.appendChild(button);
-            }
-        }
-
-        // Initialisation de la première page
-        displayUsers(1);
-    </script>
-
         <tr>
             <th>Nom</th>
             <th>Email</th>
@@ -98,6 +29,7 @@
         </tr>
         </thead>
         <tbody>
+
         <!-- Données utilisateurs -->
         <tr>
             <td>Dupont</td>
@@ -109,12 +41,37 @@
             <td>durand@gmail.com</td>
             <td>987-654-321</td>
         </tr>
+
+        <!-- Les données JSON seront insérées ici -->
+
         </tbody>
     </table>
 </main>
 <footer>
     <p>&copy; 2025 Projet Soutenance</p>
 </footer>
->>>>>>> feature/utilisateurs
+
+
+
+<!-- Ajout du script pour charger les données JSON -->
+<script>
+    // Charger les données depuis le fichier JSON
+    fetch('users.json')
+        .then(response => response.json())
+        .then(data => {
+            const tbody = document.querySelector('tbody');
+            data.forEach(user => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                        <td>${user.nom}</td>
+                        <td>${user.email}</td>
+                        <td>${user.telephone}</td>
+                    `;
+                tbody.appendChild(row);
+            });
+        })
+        .catch(error => console.error('Erreur de chargement:', error));
+</script>
+>>>>>>> feature/users-json
 </body>
 </html>
