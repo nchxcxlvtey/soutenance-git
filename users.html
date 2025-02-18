@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Utilisateurs</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+    <h1>Liste des utilisateurs</h1>
+    <nav>
+        <ul>
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="users.html">Utilisateurs</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <h2>Liste des utilisateurs</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Email</th>
+            <th>Téléphone</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Les données JSON seront insérées ici -->
+        </tbody>
+    </table>
+</main>
+<footer>
+    <p>&copy; 2023 Projet Soutenance</p>
+</footer>
+
+<!-- Ajout du script pour charger les données JSON -->
+<script>
+    // Charger les données depuis le fichier JSON
+    fetch('users.json')
+        .then(response => response.json())
+        .then(data => {
+            const tbody = document.querySelector('tbody');
+            data.forEach(user => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                        <td>${user.nom}</td>
+                        <td>${user.email}</td>
+                        <td>${user.telephone}</td>
+                    `;
+                tbody.appendChild(row);
+            });
+        })
+        .catch(error => console.error('Erreur de chargement:', error));
+</script>
+</body>
+</html>

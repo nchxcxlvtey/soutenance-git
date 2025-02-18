@@ -1,0 +1,6 @@
+     [
+         { "nom": "Dupont", "email": "dupont@gmail.com", "telephone": "123-456-789" },
+         { "nom": "Durand", "email": "durand@gmail.com", "telephone": "987-654-321" },
+         { "nom": "Martin", "email": "martin@gmail.com", "telephone": "456-789-012" },
+         { "nom": "Petit", "email": "petit@gmail.com", "telephone": "321-654-098" }
+     ]
