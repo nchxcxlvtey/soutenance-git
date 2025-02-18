@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentification</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1>Connexion</h1>
+<form id="loginForm">
+    <label for="username">Nom d'utilisateur :</label>
+    <input type="text" id="username" name="username" required>
+
+    <label for="password">Mot de passe :</label>
+    <input type="password" id="password" name="password" required>
+
+    <button type="submit">Se connecter</button>
+</form>
+
+<script>
+    // Exemple très basique pour l'authentification (sans backend)
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        if (username === "admin" && password === "admin123") {
+            alert("Connexion réussie !");
+            window.location.href = "index.html"; // Redirection après succès
+        } else {
+            alert("Identifiants incorrects !");
+        }
+    });
+</script>
+</body>
+</html>
