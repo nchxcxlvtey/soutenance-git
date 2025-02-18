@@ -7,10 +7,6 @@
 <body>
 <main>
     <h2>Liste des utilisateurs</h2>
-
-    <!-- Barre de recherche -->
-    <input type="text" id="searchBar" placeholder="Rechercher un utilisateur..." onkeyup="searchUser()" />
-
     <table>
         <thead>
             <tr>
@@ -19,23 +15,65 @@
                 <th>Téléphone</th>
             </tr>
         </thead>
-        <tbody>
-            <!-- Les données JSON seront insérées ici -->
+        <tbody id="userTable">
+            <!-- Les données seront insérées ici -->
         </tbody>
     </table>
 
-    <script>
-        // Fonction pour la recherche
-        function searchUser() {
-            const searchInput = document.getElementById("searchBar").value.toLowerCase();
-            const rows = document.querySelectorAll("tbody tr");
+    <div id="pagination">
+        <!-- Boutons pour la pagination -->
+    </div>
 
-            rows.forEach(row => {
-                const cells = row.querySelectorAll("td");
-                const match = Array.from(cells).some(cell => cell.textContent.toLowerCase().includes(searchInput));
-                row.style.display = match ? "" : "none";
+    <script>
+        const users = [
+            { "nom": "Dupont", "email": "dupont@gmail.com", "telephone": "123" },
+            { "nom": "Martin", "email": "martin@gmail.com", "telephone": "456" },
+            /* Ajoute autant d'utilisateurs que nécessaire */
+        ];
+
+        const rowsPerPage = 5;
+        let currentPage = 1;
+
+        // Fonction pour afficher les utilisateurs par page
+        function displayUsers(page) {
+            const start = (page - 1) * rowsPerPage;
+            const end = start + rowsPerPage;
+
+            const usersToShow = users.slice(start, end);
+
+            const tbody = document.getElementById("userTable");
+            tbody.innerHTML = "";
+
+            usersToShow.forEach(user => {
+                const row = `
+                    <tr>
+                        <td>${user.nom}</td>
+                        <td>${user.email}</td>
+                        <td>${user.telephone}</td>
+                    </tr>`;
+                tbody.innerHTML += row;
             });
+
+            updatePagination();
         }
+
+        // Fonction pour afficher les boutons de pagination
+        function updatePagination() {
+            const totalPages = Math.ceil(users.length / rowsPerPage);
+            const paginationDiv = document.getElementById("pagination");
+
+            paginationDiv.innerHTML = "";
+
+            for (let i = 1; i <= totalPages; i++) {
+                const button = document.createElement("button");
+                button.textContent = i;
+                button.addEventListener("click", () => displayUsers(i));
+                paginationDiv.appendChild(button);
+            }
+        }
+
+        // Initialisation de la première page
+        displayUsers(1);
     </script>
 </main>
 </body>
